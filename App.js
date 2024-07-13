@@ -9,10 +9,21 @@ import {
   Dimensions,
   ActivityIndicator,
 } from "react-native";
+import Fontisto from "@expo/vector-icons/Fontisto";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 const API_KEY = "";
+
+const icons = {
+  Clear: "day-sunny",
+  Clouds: "cloudy",
+  Rain: "rain",
+  Atmosphere: "cloudy-gusts",
+  Snow: "snow",
+  Drizzle: "day-rain",
+  Thunderstorm: "lightning",
+};
 
 export default function App() {
   const [city, setCity] = useState("Loading...");
@@ -40,7 +51,7 @@ export default function App() {
     setCity(location[0].city);
     const { list } = await (
       await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric&lang=kr`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
       )
     ).json();
     const filteredList = list.filter(({ dt_txt }) =>
@@ -74,17 +85,27 @@ export default function App() {
         ) : (
           days.map((day, index) => (
             <View style={styles.day} key={index}>
-              <Text style={styles.temp}>
-                {parseFloat(day.main.temp).toFixed(1)}
-              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                  width: "100%",
+                }}>
+                <Text style={styles.temp}>
+                  {parseFloat(day.main.temp).toFixed(1)}
+                </Text>
+                <Fontisto
+                  name={icons[day.weather[0].main]}
+                  size={68}
+                  color="white"
+                />
+              </View>
               <Text style={styles.description}>{day.weather[0].main}</Text>
               <Text style={styles.tinyText}>{day.weather[0].description}</Text>
             </View>
           ))
         )}
-
-        <Text style={styles.temp}>27</Text>
-        <Text style={styles.description}>Sunny</Text>
       </ScrollView>
     </View>
   );
@@ -101,8 +122,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   cityName: {
-    fontSize: 68,
+    fontSize: 58,
     fontWeight: "500",
+    color: "white",
   },
   weather: {
     //contentContainerStyle는 flex를 사용하지 않는다.
@@ -110,14 +132,24 @@ const styles = StyleSheet.create({
   },
   day: {
     width: SCREEN_WIDTH,
-    alignItems: "center",
   },
-  description: { fontSize: 60, marginTop: -30 },
+  color: "white",
+  description: {
+    fontSize: 40,
+    marginTop: -10,
+    fontWeight: "600",
+    color: "white",
+    marginLeft: 30,
+  },
   temp: {
-    marginTop: 50,
-    fontSize: 178,
+    marginTop: 100,
+    fontSize: 120,
+    fontWeight: "600",
+    color: "white",
   },
   tinyText: {
-    fontSize: 30,
+    fontSize: 20,
+    color: "white",
+    marginLeft: 30,
   },
 });
