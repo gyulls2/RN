@@ -13,7 +13,7 @@ import Fontisto from "@expo/vector-icons/Fontisto";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
-const API_KEY = "3a8632f380449ded63a146b5d7d81395";
+const API_KEY = "";
 
 const icons = {
   Clear: "day-sunny",
