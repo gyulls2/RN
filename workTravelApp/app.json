@@ -1,5 +1,6 @@
 {
   "expo": {
+    "jsEngine": "hermes",
     "name": "workTravelApp",
     "slug": "workTravelApp",
     "version": "1.0.0",
@@ -12,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gyuli.workTravelApp"
     },
     "android": {
       "adaptiveIcon": {
