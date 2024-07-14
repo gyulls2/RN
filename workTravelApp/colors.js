@@ -1,4 +1,6 @@
 export const theme = {
   bg: "black",
-  gray: "#3a3d40",
+  grey: "#3a3d40",
+  todoBg: "#5c5e60",
+  done: "#616161",
 };
